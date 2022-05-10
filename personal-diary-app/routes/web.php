@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//HOME
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+//Note
+Route::get('/note/create', [NoteController::class, 'create'])->name('noteCreate');
