@@ -16,7 +16,7 @@
 
                     {{ __('You are free to add your personal notes') }}
 
-                    <button class="btn btn-info">Add Note</button>
+                    <a href="{{ route('noteCreate') }}" class="btn btn-info">Add Note</a>
                 </div>
                 
             </div>
