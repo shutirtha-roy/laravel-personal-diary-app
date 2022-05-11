@@ -27,7 +27,12 @@ class NoteController extends Controller
    
     public function store(Request $request)
     {
-        $this->validateStoredData($request);
+        $noteRequirements = [
+            'title' => 'required',
+            'content' => 'required'
+        ];
+
+        $request->validate($noteRequirements);
 
         $note = new Note();
         $user = $this->getLoggedInUserInfo();
@@ -36,16 +41,6 @@ class NoteController extends Controller
         $note->content = $request->content;
         $user->note()->save($note);
 
-        
-    }
-
-    public function validateStoredData($request)
-    {
-        $noteRequirements = [
-            'title' => 'required',
-            'content' => 'required'
-        ];
-
-        $this->request->validate($noteRequirements);
+        return redirect('/');
     }
 }
