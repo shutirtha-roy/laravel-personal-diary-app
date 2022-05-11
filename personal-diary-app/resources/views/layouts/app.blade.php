@@ -18,13 +18,36 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.select-toggle').each(function(){    
+                var select = $(this), values = {};    
+                $('option',select).each(function(i, option){
+                    values[option.value] = option.selected;        
+                }).click(function(event){        
+                    values[this.value] = !values[this.value];
+                    $('option',select).each(function(i, option){            
+                        option.selected = values[option.value];        
+                    });    
+                });
+            });
+        });
+    </script>
+
+
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    Personal Diary
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -80,4 +103,12 @@
         </main>
     </div>
 </body>
+
+
+
+<script>
+    CKEDITOR.replace('content');
+</script>
+
+
 </html>
