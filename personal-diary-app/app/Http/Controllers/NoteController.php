@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -21,7 +22,30 @@ class NoteController extends Controller
 
     public function create() 
     {
-        $userName = $this->getLoggedInUserInfo()['name'];
-        return view('note.create', compact('userName'));
+        return view('note.create');
+    }
+   
+    public function store(Request $request)
+    {
+        $this->validateStoredData($request);
+
+        $note = new Note();
+        $user = $this->getLoggedInUserInfo();
+
+        $note->title = $request->title;
+        $note->content = $request->content;
+        $user->note()->save($note);
+
+        
+    }
+
+    public function validateStoredData($request)
+    {
+        $noteRequirements = [
+            'title' => 'required',
+            'content' => 'required'
+        ];
+
+        $this->request->validate($noteRequirements);
     }
 }
