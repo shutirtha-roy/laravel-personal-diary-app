@@ -26,6 +26,17 @@
         </div>
     </div>
 
+    <div class="mb-3">
+        <label class="form-check-label h5" for="flexRadioDefault2">
+            Please select the desired category
+        </label>
+
+        <select name="category_id" class="form-select">
+            @foreach ($allCategories as $category)
+                <option value="{{ $category->id }}">{{ $category->category_type }}</option>
+            @endforeach
+        </select>
+    </div>
     
 
 
