@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
+    private $noteRequirements = [
+        'title' => 'required',
+        'content' => 'required',
+        'public_opinion' => 'required'
+    ];
     
     public function __construct()
     {
@@ -27,18 +32,19 @@ class NoteController extends Controller
    
     public function store(Request $request)
     {
-        $noteRequirements = [
-            'title' => 'required',
-            'content' => 'required'
-        ];
-
-        $request->validate($noteRequirements);
+        $request->validate($this->noteRequirements);
 
         $note = new Note();
         $user = $this->getLoggedInUserInfo();
 
         $note->title = $request->title;
         $note->content = $request->content;
+
+        if($request->public_opinion == "yes")
+            $note->public = 1;
+        else if($request->public_opinion == "no")
+            $note->public = 0;
+
         $user->note()->save($note);
 
         return redirect('/');
