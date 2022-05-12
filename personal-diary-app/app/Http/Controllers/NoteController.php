@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class NoteController extends Controller
     private $noteRequirements = [
         'title' => 'required',
         'content' => 'required',
-        'public_opinion' => 'required'
+        'public_opinion' => 'required',
+        'category_id' => 'required'
     ];
     
     public function __construct()
@@ -27,7 +29,8 @@ class NoteController extends Controller
 
     public function create() 
     {
-        return view('note.create');
+        $allCategories = Category::all();
+        return view('note.create', ['allCategories' => $allCategories]);
     }
    
     public function store(Request $request)
@@ -45,7 +48,10 @@ class NoteController extends Controller
         else if($request->public_opinion == "no")
             $note->public = 0;
 
+        $categoryId = (int)$request->category_id;
+
         $user->note()->save($note);
+        $note->category()->attach($categoryId);
 
         return redirect('/');
     }
