@@ -106,6 +106,13 @@
         </nav>
 
         <main class="py-4 container">
+
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
