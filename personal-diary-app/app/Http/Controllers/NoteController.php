@@ -38,11 +38,16 @@ class NoteController extends Controller
         //dd($request->all());
         $request->validate($this->noteRequirements);
 
+        $newImageName = time() . '-' . $request->title . '.' . 
+                        $request->image->extension();
+        $request->image->move(public_path('images'), $newImageName);
+
         $note = new Note();
         $user = $this->getLoggedInUserInfo();
 
         $note->title = $request->title;
         $note->content = $request->content;
+        $note->image = $newImageName;
 
         if($request->public_opinion == "yes")
             $note->public = 1;
