@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function note() 
     {
         return $this->belongsToMany(Note::class, 'note_categories');
