@@ -6,7 +6,7 @@
 
     <div class="col-md-12">
         <h1>Create Diary</h1>
-        @include('layouts.partials.form')
+        @include('note.partials.form')
     </div>
 
 @endsection
