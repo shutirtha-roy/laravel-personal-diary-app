@@ -27,11 +27,9 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-check-label h5" for="flexRadioDefault2">
-            Please select the desired category
-        </label>
 
-        <select name="categories" class="form-select" multiple="multiple">
+        <select name="categories[]" class="form-select" multiple="multiple">
+            <option value="" disabled selected>Choose your option for categories</option>
             @foreach ($allCategories as $category)
                 <option value="{{ $category->id }}">{{ $category->category_type }}</option>
             @endforeach
