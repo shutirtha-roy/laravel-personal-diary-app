@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreNote;
 use App\Models\Category;
 use App\Models\Note;
 use App\Models\User;
@@ -10,12 +11,6 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    private $noteRequirements = [
-        'title' => 'required',
-        'content' => 'required',
-        'public_opinion' => 'required',
-        'categories' => 'required'
-    ];
     
     public function __construct()
     {
@@ -33,33 +28,33 @@ class NoteController extends Controller
         return view('note.create', ['allCategories' => $allCategories]);
     }
    
-    public function store(Request $request)
+    public function store(StoreNote $request)
     {
-        //dd($request->all());
-        $request->validate($this->noteRequirements);
+        $validated = $request->validated();
 
-        $newImageName = time() . '-' . $request->title . '.' . 
-                        $request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $newImageName = time() . '-' . $validated['title'] . '.' . 
+                        $validated['image']->extension();
+
+        $validated['image']->move(public_path('images'), $newImageName);
 
         $note = new Note();
         $user = $this->getLoggedInUserInfo();
 
-        $note->title = $request->title;
-        $note->content = $request->content;
+        $note->title = $validated['title'];
+        $note->content = $validated['content'];
         $note->image = $newImageName;
 
-        if($request->public_opinion == "yes")
+        if($validated['public_opinion'] == "yes")
             $note->public = 1;
-        else if($request->public_opinion == "no")
+        else if($validated['public_opinion'] == "no")
             $note->public = 0;
 
-        $categoryIds = array_map('intval', $request->categories);
+        $categoryIds = array_map('intval', $validated['categories']);
 
         $user->note()->save($note);
         $note->category()->attach($categoryIds);
 
-        $request->session()->flash('status', 'Your diary is Added!');
+        session()->flash('status', 'Your diary is Added!');
 
         return redirect('/');
     }
