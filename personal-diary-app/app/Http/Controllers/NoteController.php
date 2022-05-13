@@ -59,6 +59,10 @@ class NoteController extends Controller
         $user->note()->save($note);
         $note->category()->attach($categoryIds);
 
+        $request->session()->flash('status', 'Your diary is Added!');
+
         return redirect('/');
     }
+
+    
 }
