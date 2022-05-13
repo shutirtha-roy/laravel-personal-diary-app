@@ -31,12 +31,14 @@
             Please select the desired category
         </label>
 
-        <select name="category_id" class="form-select">
+        <select name="category_id[]" class="form-select" multiple="multiple">
             @foreach ($allCategories as $category)
                 <option value="{{ $category->id }}">{{ $category->category_type }}</option>
             @endforeach
         </select>
     </div>
+
+
     
 
 
