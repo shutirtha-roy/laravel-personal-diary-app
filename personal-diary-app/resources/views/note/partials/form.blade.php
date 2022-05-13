@@ -11,6 +11,11 @@
     </div>
 
     <div class="mb-3">
+        <label for="title" class="form-label bold">Upload Your Image</label>
+        <input class="form-control" type="file" name="image">
+    </div>
+
+    <div class="mb-3">
         <label for="title" class="form-label h3">Do you want to share it to the public?</label>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="public_opinion" id="flexRadioDefault1" value="yes">
