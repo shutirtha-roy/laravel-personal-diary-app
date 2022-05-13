@@ -26,6 +26,7 @@ class NoteController extends Controller
     {
         $allNotes = Note::paginate(12);
         $allCategories = Category::all();
+        
         return view('notes.showNote', ['allNotes' => $allNotes, 'allCategories' => $allCategories]);
     }
 
