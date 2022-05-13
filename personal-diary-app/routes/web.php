@@ -28,7 +28,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Note
 Route::prefix('/note')->name('note.')->group(function() {
-    Route::get('showNote', [NoteController::class, 'showNote'])->name('showNote');
-    Route::get('create', [NoteController::class, 'create'])->name('create');
-    Route::post('store-note', [NoteController::class, 'store'])->name('store');
+    Route::controller(NoteController::class)->group(function() {
+        Route::get('showNote', 'showNote')->name('showNote');
+        Route::get('create', 'create')->name('create');
+        Route::post('store-note', 'store')->name('store');
+    });
 });
