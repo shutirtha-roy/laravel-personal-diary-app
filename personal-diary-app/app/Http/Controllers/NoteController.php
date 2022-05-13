@@ -14,7 +14,7 @@ class NoteController extends Controller
         'title' => 'required',
         'content' => 'required',
         'public_opinion' => 'required',
-        'category_id' => 'required'
+        'categories' => 'required'
     ];
     
     public function __construct()
@@ -24,7 +24,7 @@ class NoteController extends Controller
 
     public function getLoggedInUserInfo()
     {
-        return User::find(Auth::id());
+        return User::findOrFail(Auth::id());
     }
 
     public function create() 
@@ -35,6 +35,7 @@ class NoteController extends Controller
    
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate($this->noteRequirements);
 
         $note = new Note();
@@ -48,10 +49,10 @@ class NoteController extends Controller
         else if($request->public_opinion == "no")
             $note->public = 0;
 
-        $categoryId = (int)$request->category_id;
+        $categoryIds = array_map('intval', $request->categories);
 
         $user->note()->save($note);
-        $note->category()->attach($categoryId);
+        $note->category()->attach($categoryIds);
 
         return redirect('/');
     }
