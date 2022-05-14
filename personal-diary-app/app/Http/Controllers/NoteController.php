@@ -8,6 +8,7 @@ use App\Models\Note;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class NoteController extends Controller
 {
@@ -33,14 +34,12 @@ class NoteController extends Controller
 
     public function singleNote($id)
     {
-        $note = Note::findOrFail($id);
-        return view('notes.singleNote', ['note' => $note]);
+        return view('notes.singleNote', ['note' => Note::findOrFail($id)]);
     }
 
     public function create() 
     {
-        $allCategories = Category::all();
-        return view('notes.create', ['allCategories' => $allCategories]);
+        return view('notes.create', ['allCategories' => Category::all()]);
     }
    
     public function store(StoreNote $request)
@@ -74,5 +73,36 @@ class NoteController extends Controller
         return redirect()->route('notes.showNote');
     }
 
-    
+    public function edit($id)
+    {
+        return view('notes.edit', ['note' => Note::findOrFail($id)]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request;
+
+        if($request->hasFile('image'))
+        {
+            $newImageName = time() . '-' . $validated['title'] . '.' .
+                            $validated['image']->extension();
+            $validated['image']->move(public_path('images'), $newImageName);
+            File::delete('images/' . Note::find($id)->image);
+
+            Note::find($id)->update([
+                'title' => $validated['title'],
+                'content' => $validated['content'],
+                'image' => $newImageName,
+            ]);
+        }
+        else
+        {
+            Note::find($id)->update([
+                'title' => $validated['title'],
+                'content' => $validated['content'],
+            ]);
+        }
+
+        return redirect()->route('notes.showNote');
+    }
 }
