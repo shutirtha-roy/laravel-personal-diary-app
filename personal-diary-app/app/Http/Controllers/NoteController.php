@@ -65,7 +65,7 @@ class NoteController extends Controller
 
         session()->flash('status', 'Your diary is Added!');
 
-        return redirect('/');
+        return redirect()->route('notes.showNote');
     }
 
     
