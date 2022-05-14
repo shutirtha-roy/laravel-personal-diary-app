@@ -13,7 +13,7 @@
             <h5 class="card-title">{{ $note->title }}</h5>
             <p class="card-text">{!! substr($note->content, 0, 80) !!}</p>
 
-            @if(Route::is('note.showNote'))
+            @if(Route::is('notes.showNote'))
                 <a href="#" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             @endif

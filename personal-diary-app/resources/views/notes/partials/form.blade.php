@@ -1,4 +1,4 @@
-<form method="POST" action="{{ url('note/store-note') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('notes.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
