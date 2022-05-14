@@ -31,7 +31,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 //Note
-Route::prefix('/note')->name('note.')->group(function() {
+Route::prefix('/notes')->name('notes.')->group(function() {
     Route::controller(NoteController::class)->group(function() {
         Route::get('showNote', 'showNote')->name('showNote');
         Route::get('create', 'create')->name('create');
