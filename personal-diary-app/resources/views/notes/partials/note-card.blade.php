@@ -4,8 +4,12 @@
         <div class="card-body text-center">
             <h5 class="card-title">{{ $note->title }}</h5>
             <p class="card-text">{!! substr($note->content, 0, 80) !!}</p>
-            <a href="#" class="btn btn-primary">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+
+            @if(Route::is('note.showNote'))
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            @endif
+            
         </div>
     </div>
 </div>
