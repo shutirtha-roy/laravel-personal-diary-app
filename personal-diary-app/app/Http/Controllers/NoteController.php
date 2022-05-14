@@ -22,12 +22,13 @@ class NoteController extends Controller
         return User::findOrFail(Auth::id());
     }
 
+    
+
     public function showNote()
     {
-        $allNotes = Note::paginate(12);
-        $allCategories = Category::all();
+        $allNotes = Note::where('user_id', Auth::id())->paginate(8);
         
-        return view('notes.showNote', ['allNotes' => $allNotes, 'allCategories' => $allCategories]);
+        return view('notes.showNote', ['allNotes' => $allNotes]);
     }
 
     public function create() 
