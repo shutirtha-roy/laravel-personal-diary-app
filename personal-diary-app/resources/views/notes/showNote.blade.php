@@ -12,4 +12,6 @@
             @endforelse
         </div>
 
+        {{ $allNotes->links() }}
+
 @endsection
