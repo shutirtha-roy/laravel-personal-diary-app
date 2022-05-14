@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::controller(WelcomeController::class)->group(function() {
+    Route::get('/', 'index')->name('welcome');
+    Route::get('/welcome/note/{id}', 'showWelcomeNote')->where('id', '[0-9]+');
+});
+
 
 Auth::routes();
 
