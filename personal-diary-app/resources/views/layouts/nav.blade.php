@@ -36,10 +36,10 @@
                 @else
 
                     <li class="nav-item">
-                        <a href="{{ url('/home') }}" class="nav-link text-black fw-bolder fs-5">Home</a>
+                        <a href="{{ route('home') }}" class="nav-link text-black fw-bolder fs-5">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/note/showNote') }}" class="nav-link text-black fw-bolder fs-5">My Diary</a>
+                        <a href="{{ route('notes.showNote') }}" class="nav-link text-black fw-bolder fs-5">My Diary</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle  text-black fw-bolder fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
