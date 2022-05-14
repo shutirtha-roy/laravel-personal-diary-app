@@ -6,7 +6,10 @@
 
     <div class="col-md-12">
         <h1>Create Diary</h1>
-        @include('notes.partials.form')
+        <form  action="{{ route('notes.store') }}" enctype="multipart/form-data" method="POST">
+            @csrf
+            @include('notes.partials.form')
+        </form>
     </div>
 
 @endsection
