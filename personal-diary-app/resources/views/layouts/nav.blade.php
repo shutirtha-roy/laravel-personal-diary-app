@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand text-black fw-bolder fs-4" href="{{ url('/') }}">
             {{-- {{ config('app.name', 'Laravel') }} --}}
             Personal Diary
         </a>
@@ -17,37 +17,37 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
-                @guest
-                    <li class="nav-item">
-                        <a href="{{ route('welcome') }}" class="nav-link">Public Diary</a>
-                    </li>
+                <li class="nav-item">
+                    <a href="{{ route('welcome') }}" class="nav-link text-black fw-bolder fs-5">Public Diary</a>
+                </li>
 
+                @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-black fw-bolder fs-5" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-black fw-bolder fs-5" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
 
                     <li class="nav-item">
-                        <a href="{{ url('/home') }}" class="nav-link">Home</a>
+                        <a href="{{ url('/home') }}" class="nav-link text-black fw-bolder fs-5">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/note/showNote') }}" class="nav-link">My Diary</a>
+                        <a href="{{ url('/note/showNote') }}" class="nav-link text-black fw-bolder fs-5">My Diary</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle  text-black fw-bolder fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                        <div class="dropdown-menu dropdown-menu-end fs-5" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item  text-black fw-bolder" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
