@@ -13,4 +13,9 @@ class WelcomeController extends Controller
         $allNotes = Note::where('public', 1)->paginate(12);
         return view('welcome', ['allNotes' => $allNotes]);
     }
+
+    public function showWelcomeNote($id)
+    {
+        $welcomeNote = Note::find($id);
+    }
 }
