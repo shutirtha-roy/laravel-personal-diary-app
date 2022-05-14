@@ -31,6 +31,12 @@ class NoteController extends Controller
         return view('notes.showNote', ['allNotes' => $allNotes]);
     }
 
+    public function singleNote($id)
+    {
+        $note = Note::findOrFail($id);
+        return view('notes.singleNote', ['note' => $note]);
+    }
+
     public function create() 
     {
         $allCategories = Category::all();
