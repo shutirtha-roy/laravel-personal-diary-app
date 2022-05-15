@@ -105,4 +105,15 @@ class NoteController extends Controller
 
         return redirect()->route('notes.showNote');
     }
+
+    public function delete($id)
+    {
+        File::delete('images/'.Note::find($id)->image);
+        Note::find($id)->delete();
+
+        session()->flash('delete-status', 'Note was deleted!');
+
+
+        return redirect()->route('notes.showNote');
+    }
 }
