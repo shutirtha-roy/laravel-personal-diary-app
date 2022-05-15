@@ -13,10 +13,16 @@
             <h5 class="card-title"><a href="{{ url('notes/' . $note->id) }}">{{ $note->title }}</a></h5>
             <p class="card-text">{!! substr($note->content, 0, 80) !!}</p>
 
-            @if(Route::is('notes.showNote'))
-                <a href="{{ url('notes/' . $note->id . '/edit') }}" class="btn btn-primary">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
-            @endif
+            <div class="d-flex justify-content-center">
+                @if(Route::is('notes.showNote'))
+                    <a href="{{ route('notes.editNote', ['id' => $note->id]) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('notes.noteDelete', ['id' => $note->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger" value="Delete!">
+                    </form>
+                @endif
+            </div>
             
         </div>
     </div>
