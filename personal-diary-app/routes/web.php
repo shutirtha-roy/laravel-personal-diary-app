@@ -39,5 +39,6 @@ Route::prefix('/notes')->name('notes.')->group(function() {
         Route::post('store-note', 'store')->name('store');
         Route::get('{id}/edit', 'edit')->where('id', '[0-9]+')->name('editNote');
         Route::put('{id}/update-note', 'update')->where('id', '[0-9]+')->name('updateNote');
+        Route::delete('{id}/delete', 'delete')->where('id', '[0-9]+')->name('noteDelete');
     });
 });
