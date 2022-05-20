@@ -33,7 +33,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Note
 Route::prefix('/notes')->name('notes.')->group(function() {
     Route::controller(NoteController::class)->group(function() {
-        Route::get('{id}', 'singleNote')->where('id', '[0-9]+');
+        Route::get('{id}', 'singleNote')->where('id', '[0-9]+')->name('showSingleNote');
         Route::get('showNote', 'showNote')->name('showNote');
         Route::get('create', 'create')->name('create');
         Route::post('store-note', 'store')->name('store');
