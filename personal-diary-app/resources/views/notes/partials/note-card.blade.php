@@ -10,7 +10,7 @@
                 <h1></h1>
             @endforelse
 
-            <h5 class="card-title"><a href="{{ url('notes/' . $note->id) }}">{{ $note->title }}</a></h5>
+            <h5 class="card-title"><a class="text-dark text-decoration-none fw-bold" href="{{ url('notes/' . $note->id) }}">{{ $note->title }}</a></h5>
             <p class="card-text">{!! substr($note->content, 0, 80) !!}</p>
 
             <div class="d-flex justify-content-center">
